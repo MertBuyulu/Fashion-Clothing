@@ -4,15 +4,14 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+
   .logo-container {
     height: 100%;
     width: 70px;
     // creates extra space within the container
     padding: 25px;
-
-    .logo {
-    }
   }
+
   .options {
     width: 50%;
     height: 100%;
