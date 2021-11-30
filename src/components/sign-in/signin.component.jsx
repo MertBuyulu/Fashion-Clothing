@@ -33,7 +33,6 @@ class SignIn extends React.Component {
     } catch (err) {
       console.log(err.message);
     }
-
     this.setState({ email: "", password: "" });
   };
 
@@ -63,7 +62,9 @@ class SignIn extends React.Component {
             required
           />
           <div className="buttons">
-            <CustomButton type="submit">Sign In</CustomButton>
+            <CustomButton type="submit" onClick={this.resetState}>
+              Sign In
+            </CustomButton>
             <CustomButton
               type="button"
               onClick={signInWithGoogle}
