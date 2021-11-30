@@ -12,7 +12,7 @@ import { useGoogleUser } from "./firebase/custom-hooks";
 
 function App() {
   const currentUser = useGoogleUser();
-  // console.log(currentUser);
+  //console.log(currentUser);
 
   return (
     // <Route> paths match exactly by default.\

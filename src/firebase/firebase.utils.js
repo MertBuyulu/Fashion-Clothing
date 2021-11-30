@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+// signInWithRedirect does not give user closed the pop up error
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const config = {
   apiKey: "AIzaSyCRYsDOZ4_Pi9JPVjNHRyFDP5A0RVk9Zyo",
@@ -13,8 +14,33 @@ const config = {
 
 initializeApp(config);
 
-export const auth = getAuth();
 export const firestore = getFirestore();
+export const auth = getAuth();
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  // if the user is not signed in run the code below.
+  if (!userAuth) return;
+
+  const userRef = doc(firestore, `users/${userAuth.uid}`);
+  const snapShot = await getDoc(userRef);
+
+  if (!snapShot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (err) {
+      console.log("error creating user", err.message);
+    }
+  }
+  return userRef;
+};
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompts: "select_account" });

@@ -6,7 +6,8 @@ import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 // import signin functionality from firebase
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -18,18 +19,26 @@ class SignIn extends React.Component {
     };
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.setState({ email: "", password: "" });
-  };
-
   handleChange = (event) => {
     const { value, name } = event.target;
-    // computed property key for dynamic key/value assigning ES6
     this.setState({ [name]: value });
   };
 
+  handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { email, password } = this.state;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      console.log(err.message);
+    }
+
+    this.setState({ email: "", password: "" });
+  };
+
   render() {
+    const { email, password } = this.state;
     return (
       <div className="sign-in">
         <h2>I already have an account</h2>
@@ -40,7 +49,7 @@ class SignIn extends React.Component {
             type="email"
             name="email"
             label="email"
-            value={this.state.email}
+            value={email}
             handleChange={this.handleChange}
             required
           />
@@ -49,14 +58,14 @@ class SignIn extends React.Component {
             type="password"
             name="password"
             label="password"
-            value={this.state.password}
+            value={password}
             handleChange={this.handleChange}
             required
           />
           <div className="buttons">
             <CustomButton type="submit">Sign In</CustomButton>
             <CustomButton
-              type="submit"
+              type="button"
               onClick={signInWithGoogle}
               isGoogleSignIn
             >
