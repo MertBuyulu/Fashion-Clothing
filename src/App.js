@@ -1,11 +1,17 @@
 import React, { useEffect } from "react";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  BrowserRouter as Router,
+  Navigate,
+} from "react-router-dom";
 // styles
 import "./App.css";
 // user action function
 import { setCurrentUser } from "./redux/user/user.actions";
 // redux with hooks
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // firebase related imports
 import { auth, createUserProfileDocument } from "./firebase//firebase.utils";
 import { onAuthStateChanged } from "firebase/auth";
@@ -17,7 +23,9 @@ import Header from "./components/header/header.component";
 import SingInAndSignUpPage from "./pages/sing-in and sign-up page/sign-in-and-sign-up.component";
 
 function App() {
+  const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
       if (userAuth) {
@@ -52,7 +60,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
-        <Route path="/signin" element={<SingInAndSignUpPage />} />
+        <Route
+          path="/signin"
+          element={currentUser ? <Navigate to="/" /> : <SingInAndSignUpPage />}
+        />
       </Routes>
     </Router>
   );
