@@ -9,9 +9,13 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 // firebase
 import { auth } from "../../firebase/firebase.utils";
 import { signOut } from "firebase/auth";
+// components
+import CartIcon from "../cart-icon/cart-icon.component";
+import CardDropDown from "../card-dropdown/card-dropdown.component";
 
 const Header = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
+  const hidden = useSelector((state) => state.cart.hidden);
 
   return (
     <nav role="navigation" className="header">
@@ -34,7 +38,9 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {hidden ? null : <CardDropDown />}
     </nav>
   );
 };

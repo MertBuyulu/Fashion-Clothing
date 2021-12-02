@@ -7,11 +7,10 @@ import {
 } from "react-router-dom";
 // styles
 import "./App.css";
-// user action function
+// userReducer action function
 import { setCurrentUser } from "./redux/user/user.actions";
 // redux with hooks
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // firebase related imports
 import { auth, createUserProfileDocument } from "./firebase//firebase.utils";
 import { onAuthStateChanged } from "firebase/auth";
