@@ -11,7 +11,7 @@ import { auth } from "../../firebase/firebase.utils";
 import { signOut } from "firebase/auth";
 // components
 import CartIcon from "../cart-icon/cart-icon.component";
-import CardDropDown from "../card-dropdown/card-dropdown.component";
+import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 
 const Header = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -40,7 +40,7 @@ const Header = () => {
         )}
         <CartIcon />
       </div>
-      {hidden ? null : <CardDropDown />}
+      {hidden ? null : <CartDropDown />}
     </nav>
   );
 };

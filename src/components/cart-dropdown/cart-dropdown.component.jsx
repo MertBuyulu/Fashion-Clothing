@@ -1,6 +1,6 @@
 import React from "react";
 //styles
-import "./card-dropdown.styles.scss";
+import "./cart-dropdown.styles.scss";
 // compoenents
 import CustomButton from "../custom-button/custom-button.component";
 
