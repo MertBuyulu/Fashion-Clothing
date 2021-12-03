@@ -6,10 +6,11 @@ import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
 //redux
 import { useSelector } from "react-redux";
+import { selectCartItems } from "../../redux/cart/cart.selectors";
 
 const CardDropDown = () => {
-  // get the items added to the cart in real time
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  // get the items added to the cart in real
+  const cartItems = useSelector((state) => selectCartItems(state));
 
   return (
     <div className="card-container">
