@@ -18,6 +18,7 @@ import { auth, createUserProfileDocument } from "./firebase//firebase.utils";
 import { onAuthStateChanged } from "firebase/auth";
 import { onSnapshot } from "firebase/firestore";
 // pages
+import CheckOutPage from "./pages/checkout/checkout.component";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
@@ -61,6 +62,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
+        <Route path="/checkout" element={<CheckOutPage />} />
         <Route
           path="/signin"
           element={currentUser ? <Navigate to="/" /> : <SingInAndSignUpPage />}
