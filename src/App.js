@@ -9,6 +9,8 @@ import {
 import "./App.css";
 // userReducer action function
 import { setCurrentUser } from "./redux/user/user.actions";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
 // redux with hooks
 import { useDispatch, useSelector } from "react-redux";
 // firebase related imports
@@ -22,7 +24,7 @@ import Header from "./components/header/header.component";
 import SingInAndSignUpPage from "./pages/sing-in and sign-up page/sign-in-and-sign-up.component";
 
 function App() {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const { currentUser } = useSelector(structuredSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -67,5 +69,9 @@ function App() {
     </Router>
   );
 }
+
+const structuredSelector = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
 
 export default App;

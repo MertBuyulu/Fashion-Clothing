@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 // redux
 import { useSelector } from "react-redux";
+// memoized selectors
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
 // styles
 import "./header.styles.scss";
 //logo component
@@ -14,8 +18,7 @@ import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 
 const Header = () => {
-  const currentUser = useSelector((state) => state.user.currentUser);
-  const hidden = useSelector((state) => state.cart.hidden);
+  const { currentUser, hidden } = useSelector(structuredSelector);
 
   return (
     <nav role="navigation" className="header">
@@ -44,5 +47,10 @@ const Header = () => {
     </nav>
   );
 };
+
+const structuredSelector = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
+});
 
 export default Header;

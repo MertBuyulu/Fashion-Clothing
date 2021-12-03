@@ -6,10 +6,11 @@ import "./cart-icon.styles.scss";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
 import { selectCartItemsCount } from "../../redux/cart/cart.selectors";
 import { useDispatch, useSelector } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 const CartIcon = () => {
   const dispatch = useDispatch();
-  const itemCount = useSelector((state) => selectCartItemsCount(state));
+  const { itemCount } = useSelector(structuredSelector);
 
   return (
     <div
@@ -21,5 +22,9 @@ const CartIcon = () => {
     </div>
   );
 };
+
+const structuredSelector = createStructuredSelector({
+  itemCount: selectCartItemsCount,
+});
 
 export default CartIcon;

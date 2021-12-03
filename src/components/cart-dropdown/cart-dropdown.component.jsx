@@ -7,10 +7,11 @@ import CartItem from "../cart-item/cart-item.component";
 //redux
 import { useSelector } from "react-redux";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
+import { createStructuredSelector } from "reselect";
 
 const CardDropDown = () => {
   // get the items added to the cart in real
-  const cartItems = useSelector((state) => selectCartItems(state));
+  const { cartItems } = useSelector(structuredSelector);
 
   return (
     <div className="card-container">
@@ -23,5 +24,9 @@ const CardDropDown = () => {
     </div>
   );
 };
+
+const structuredSelector = createStructuredSelector({
+  cartItems: selectCartItems,
+});
 
 export default CardDropDown;
