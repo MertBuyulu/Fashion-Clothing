@@ -61,10 +61,10 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/checkout" element={<CheckOutPage />} />
+        <Route path="shop/*" element={<ShopPage />} />
+        <Route path="checkout" element={<CheckOutPage />} />
         <Route
-          path="/signin"
+          path="signin"
           element={currentUser ? <Navigate to="/" /> : <SingInAndSignUpPage />}
         />
       </Routes>

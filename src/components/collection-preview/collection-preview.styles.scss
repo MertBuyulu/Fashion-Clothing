@@ -1,3 +1,4 @@
+// preview container
 .collection-preview {
   display: flex;
   flex-direction: column;
@@ -8,6 +9,7 @@
     margin-bottom: 25px;
   }
 
+  // inner preview container
   .preview {
     display: flex;
     justify-content: space-between;
