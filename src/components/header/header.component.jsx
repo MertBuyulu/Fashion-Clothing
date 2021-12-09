@@ -1,13 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 // redux
 import { useSelector } from "react-redux";
 // memoized selectors
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
-// styles
-import "./header.styles.scss";
+// styled components
+import * as S from "./header.styles";
 //logo component
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 // firebase
@@ -21,30 +20,24 @@ const Header = () => {
   const { currentUser, hidden } = useSelector(structuredSelector);
 
   return (
-    <nav role="navigation" className="header">
-      <Link className="logo-container" to="/">
-        <Logo className="logo" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
-          SHOP
-        </Link>
-        <Link className="option" to="/contact">
-          CONTACT
-        </Link>
+    <S.Navigation role="navigation">
+      <S.LogoBox to="/">
+        <Logo />
+      </S.LogoBox>
+      <S.NavLinks>
+        <S.NavLink to="/shop">SHOP</S.NavLink>
+        <S.NavLink to="/contact">CONTACT</S.NavLink>
         {currentUser ? (
-          <Link to="#" className="option" onClick={() => signOut(auth)}>
+          <S.NavLink to="#" onClick={() => signOut(auth)}>
             SIGN OUT
-          </Link>
+          </S.NavLink>
         ) : (
-          <Link className="option" to="/signin">
-            SIGN IN
-          </Link>
+          <S.NavLink to="/signin">SIGN IN</S.NavLink>
         )}
         <CartIcon />
-      </div>
+      </S.NavLinks>
       {hidden ? null : <CartDropDown />}
-    </nav>
+    </S.Navigation>
   );
 };
 

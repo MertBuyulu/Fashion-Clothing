@@ -1,25 +1,9 @@
 import React from "react";
+// styled component
+import * as S from "./custom-button.styles";
 
-import "./custom-button.styles.scss";
-
-const CustomButton = ({
-  children,
-  isGoogleSignIn,
-  inverted,
-  ...otherProps
-}) => {
-  return (
-    <button
-      className={`${inverted ? "inverted" : ""} ${
-        isGoogleSignIn ? "google-sign-in" : ""
-      } custom-button`}
-      {...otherProps}
-    >
-      {/* children props will display whatever is being passed inside of CustomButton component. 
-          In our case it is the text we will display inside of our button container*/}
-      {children}
-    </button>
-  );
+const CustomButton = ({ children, ...props }) => {
+  return <S.CustomButton {...props}>{children}</S.CustomButton>;
 };
 
 export default CustomButton;
