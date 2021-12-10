@@ -1,7 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // signInWithRedirect does not give user closed the pop up error
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  writeBatch,
+} from "firebase/firestore";
 
 const config = {
   apiKey: "AIzaSyCRYsDOZ4_Pi9JPVjNHRyFDP5A0RVk9Zyo",
@@ -40,6 +47,23 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     }
   }
   return userRef;
+};
+
+// utility function to create collections with multiple documents in one request
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const batch = writeBatch(firestore);
+  const newDocRef = collection(firestore, collectionKey);
+
+  // iterate over each collection inside of collection cluster and add it to the data base
+  objectsToAdd.forEach((obj) => {
+    const docRef = doc(newDocRef);
+    batch.set(docRef, obj);
+  });
+
+  return await batch.commit();
 };
 
 const provider = new GoogleAuthProvider();
