@@ -1,6 +1,7 @@
 import React from "react";
 //styles
-import "./directory.styles.scss";
+import styled from "styled-components";
+//components
 import MenuItem from "../menu-item/menu-item.component";
 
 import { useSelector } from "react-redux";
@@ -11,16 +12,23 @@ const Directory = () => {
   const { sections } = useSelector(structuredSelector);
 
   return (
-    <div className="directory-menu">
+    <DirectoryMenuWrapper>
       {sections.map(({ id, ...otherSectionProps }) => (
         <MenuItem key={id} {...otherSectionProps} />
       ))}
-    </div>
+    </DirectoryMenuWrapper>
   );
 };
 
 const structuredSelector = createStructuredSelector({
   sections: selectDirectorySections,
 });
+
+const DirectoryMenuWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
 
 export default Directory;

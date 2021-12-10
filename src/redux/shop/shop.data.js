@@ -69,7 +69,7 @@ const SHOP_DATA = /* Used as starting data for ShopPage */ {
       },
     ],
   },
-  sneaker: {
+  sneakers: {
     id: 2,
     title: "Sneakers",
     routeName: "sneakers",

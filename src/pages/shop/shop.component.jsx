@@ -2,7 +2,7 @@ import React from "react";
 // react routing
 import { Route, Routes } from "react-router-dom";
 // components
-import CollectionsOverview from "../../components/collection-overview/collection-overview.component";
+import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
 import CollectionPage from "../collection/collection.component";
 
 const ShopPage = () => {

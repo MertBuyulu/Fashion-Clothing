@@ -1,6 +1,6 @@
 import React from "react";
-// style
-import "./checkout.styles.scss";
+// styled components
+import * as S from "./checkout.styles";
 // components
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 // redux
@@ -16,38 +16,38 @@ const CheckOutPage = () => {
   const { cartItems, total } = useSelector(structuredSelector);
 
   return (
-    <div className="checkout-page">
-      <div className="checkout-header">
-        <div className="header-block">
+    <S.CheckoutPage>
+      <S.CheckoutHeader>
+        <S.HeaderBlock>
           <span>Product</span>
-        </div>
-        <div className="header-block">
+        </S.HeaderBlock>
+        <S.HeaderBlock>
           <span>Description</span>
-        </div>
-        <div className="header-block">
+        </S.HeaderBlock>
+        <S.HeaderBlock>
           <span>Quantity</span>
-        </div>
-        <div className="header-block">
+        </S.HeaderBlock>
+        <S.HeaderBlock>
           <span>Price</span>
-        </div>
-        <div className="header-block">
+        </S.HeaderBlock>
+        <S.HeaderBlock>
           <span>Remove</span>
-        </div>
-      </div>
+        </S.HeaderBlock>
+      </S.CheckoutHeader>
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
 
-      <div className="total">
+      <S.TotalCost>
         <span>TOTAL: ${total}</span>
-      </div>
-      <div className="test-warning">
+      </S.TotalCost>
+      <S.Warning>
         *Please use the following test credit card for payments*
         <br />
         4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
-      </div>
-      <button>Pay Now</button>
-    </div>
+      </S.Warning>
+      <S.PayButton>Pay Now</S.PayButton>
+    </S.CheckoutPage>
   );
 };
 

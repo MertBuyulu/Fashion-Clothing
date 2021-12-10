@@ -1,8 +1,8 @@
 import React from "react";
 // react-router-dom
 import { useNavigate } from "react-router";
-//styles
-import "./cart-dropdown.styles.scss";
+// styled components
+import * as S from "./card-dropdown.styles";
 // compoenents
 import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
@@ -19,16 +19,16 @@ const CardDropDown = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="card-container">
-      <div className="card-items">
+    <S.Cart>
+      <S.CartItems>
         {cartItems.length ? (
           cartItems.map((cartItem) => (
             <CartItem key={cartItem.id} item={cartItem} />
           ))
         ) : (
-          <span className="empty-message">Your cart is empty</span>
+          <S.Message>Your cart is empty</S.Message>
         )}
-      </div>
+      </S.CartItems>
       <CustomButton
         onClick={() => {
           navigate("/checkout");
@@ -37,7 +37,7 @@ const CardDropDown = () => {
       >
         GO TO CHECKOUT
       </CustomButton>
-    </div>
+    </S.Cart>
   );
 };
 

@@ -12,7 +12,7 @@ const CollectionItem = ({ item }) => {
 
   return (
     <S.CollectionItem>
-      <S.Image style={{ backgroundImage: `url(${imageUrl}` }} />
+      <S.Image imageUrl={imageUrl} className="image" />
       <S.CollectionFooter>
         <S.Name>{name}</S.Name>
         <S.Price>{price}</S.Price>

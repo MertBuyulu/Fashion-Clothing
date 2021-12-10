@@ -1,26 +1,25 @@
 import React from "react";
-
-import "./form-input.styles.scss";
+//styled components
+import * as S from "./form-input.styles";
 // if user enters something then the class name will be shrink form-input otherwise form-input
 const FormInput = ({ id, handleChange, label, value, ...otherProps }) => {
   return (
-    <div className="group">
-      <input
+    <S.FormWrapper>
+      <S.FormInput
         id={id}
         value={value}
-        className="form-input"
         onChange={handleChange}
         {...otherProps}
       />
       {label ? (
-        <label
+        <S.FormInputLabel
           htmlFor={id}
-          className={`${value.length ? "shrink" : ""} form-input-label`}
+          className={`${value.length ? "shrink" : ""}`}
         >
           {label}
-        </label>
+        </S.FormInputLabel>
       ) : null}
-    </div>
+    </S.FormWrapper>
   );
 };
 

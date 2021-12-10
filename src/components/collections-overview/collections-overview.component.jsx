@@ -1,6 +1,6 @@
 import React from "react";
 //styles
-import "./collection-overview.styles.scss";
+import styled from "styled-components";
 //redux
 import { useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -11,16 +11,22 @@ import CollectionPreview from "../collection-preview/collection-preview.componen
 const CollectionsOverview = () => {
   const { collections } = useSelector(structuredSelector);
   return (
-    <div className="collection-overview">
+    <CollectionOverviewWrapper>
       {collections.map(({ id, ...otherCollectionProps }) => (
         <CollectionPreview key={id} {...otherCollectionProps} />
       ))}
-    </div>
+    </CollectionOverviewWrapper>
   );
 };
 
 const structuredSelector = createStructuredSelector({
   collections: selectCollectionsForPreview,
 });
+
+// collection overview container
+const CollectionOverviewWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export default CollectionsOverview;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./signin.styles.scss";
+import styled from "styled-components";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -39,7 +39,7 @@ class SignIn extends React.Component {
   render() {
     const { email, password } = this.state;
     return (
-      <div className="sign-in">
+      <SignInForm>
         <h2>I already have an account</h2>
         <span>Sign in with your email and password</span>
         <form onSubmit={this.handleSubmit}>
@@ -61,7 +61,7 @@ class SignIn extends React.Component {
             handleChange={this.handleChange}
             required
           />
-          <div className="buttons">
+          <SignInButtons>
             <CustomButton type="submit" onClick={this.resetState}>
               Sign In
             </CustomButton>
@@ -72,11 +72,22 @@ class SignIn extends React.Component {
             >
               Sign In With Google
             </CustomButton>
-          </div>
+          </SignInButtons>
         </form>
-      </div>
+      </SignInForm>
     );
   }
 }
+
+const SignInForm = styled.div`
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const SignInButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export default SignIn;

@@ -1,6 +1,6 @@
 import React from "react";
 //styles
-import "./checkout-item.styles.scss";
+import * as S from "./checkout-item.styles";
 // redux
 import { useDispatch } from "react-redux";
 import {
@@ -12,37 +12,30 @@ import {
 const CheckoutItem = ({ cartItem }) => {
   const { id, name, price, imageUrl, quantity } = cartItem;
   const dispatch = useDispatch();
+
   return (
-    <div className="checkout-item">
-      <div className="image-container">
+    <S.CheckoutItem>
+      <S.ImageWrapper>
         <img src={imageUrl} alt={name} />
-      </div>
-      <span className="name">{name}</span>
-      <div className="quantity">
-        <div
-          className="arrow"
-          role="button"
-          onClick={() => dispatch(removeItem(cartItem))}
-        >
+      </S.ImageWrapper>
+      <S.Text>{name}</S.Text>
+      <S.Quantity>
+        <div role="button" onClick={() => dispatch(removeItem(cartItem))}>
           &#10094;
         </div>
-        <span className="value">{quantity}</span>
-        <div
-          className="arrow"
-          role="button"
-          onClick={() => dispatch(addItem(cartItem))}
-        >
+        <span>{quantity}</span>
+        <div role="button" onClick={() => dispatch(addItem(cartItem))}>
           &#10095;
         </div>
-      </div>
-      <span className="price">{price}</span>
-      <div
-        className="remote-button"
+      </S.Quantity>
+      <S.Text>{price}</S.Text>
+      <S.RemoveButton
+        role="button"
         onClick={() => dispatch(clearItemFromCart(id))}
       >
         &#10005;
-      </div>
-    </div>
+      </S.RemoveButton>
+    </S.CheckoutItem>
   );
 };
 
