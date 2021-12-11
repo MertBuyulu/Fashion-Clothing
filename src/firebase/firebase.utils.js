@@ -66,6 +66,26 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
+export const convertCollectionToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { items, title } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  // this will create one big object consisting the individual collection
+  // objects we get back from collections.docs.map above
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {}); // {} means the initial value of accumulator is an empty object
+};
+
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompts: "select_account" });
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
