@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+} from "firebase/auth";
 // signInWithRedirect does not give user closed the pop up error
 import {
   getFirestore,
@@ -30,7 +35,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   const userRef = doc(firestore, `users/${userAuth.uid}`);
   const snapShot = await getDoc(userRef);
-
+  // this is currently displaying null to the console.
   if (!snapShot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -86,6 +91,19 @@ export const convertCollectionToMap = (collections) => {
   }, {}); // {} means the initial value of accumulator is an empty object
 };
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompts: "select_account" });
-export const signInWithGoogle = () => signInWithPopup(auth, provider);
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unSubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unSubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
+
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompts: "select_account" });
+export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);

@@ -1,6 +1,6 @@
 import React from "react";
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // memoized selectors
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selector";
@@ -9,16 +9,15 @@ import { createStructuredSelector } from "reselect";
 import * as S from "./header.styles";
 //logo component
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-// firebase
-import { auth } from "../../firebase/firebase.utils";
-import { signOut } from "firebase/auth";
 // components
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 
+import { signOutStart } from "../../redux/user/user.actions";
+
 const Header = () => {
   const { currentUser, hidden } = useSelector(structuredSelector);
-
+  const dispatch = useDispatch();
   return (
     <S.Navigation role="navigation">
       <S.LogoBox to="/">
@@ -28,7 +27,7 @@ const Header = () => {
         <S.NavLink to="/shop">SHOP</S.NavLink>
         <S.NavLink to="/contact">CONTACT</S.NavLink>
         {currentUser ? (
-          <S.NavLink to="#" onClick={() => signOut(auth)}>
+          <S.NavLink to="#" onClick={() => dispatch(signOutStart())}>
             SIGN OUT
           </S.NavLink>
         ) : (

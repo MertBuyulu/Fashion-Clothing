@@ -8,16 +8,11 @@ import {
 // styles
 import "./App.css";
 // userReducer action function
-import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
+import { checkUserSession } from "./redux/user/user.actions";
 // redux with hooks
 import { useDispatch, useSelector } from "react-redux";
-// firebase related imports
-import { auth, createUserProfileDocument } from "./firebase//firebase.utils";
-
-import { onAuthStateChanged } from "firebase/auth";
-import { onSnapshot } from "firebase/firestore";
 // pages
 import CheckOutPage from "./pages/checkout/checkout.component";
 import HomePage from "./pages/homepage/homepage.component";
@@ -30,30 +25,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        // Now calls `onSnapshot` as a function; DocumentReference passed as first argument
-        // and callback function is now the second argument
-        const unsubscribeFromSnapshot = onSnapshot(userRef, (snapshot) => {
-          dispatch(
-            setCurrentUser({
-              id: snapshot.id,
-              ...snapshot.data(),
-            })
-          );
-          // detach the listener
-          unsubscribeFromSnapshot();
-        });
-        // user is not signed in, so set its state to be null (userAuth is null)
-      } else {
-        dispatch(setCurrentUser(userAuth));
-      }
-    });
-
-    return () => {
-      unsubscribeFromAuth();
-    };
+    dispatch(checkUserSession());
   }, [dispatch]);
 
   return (
