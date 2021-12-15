@@ -3,6 +3,7 @@ import React from "react";
 import * as S from "./checkout.styles";
 // components
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
 // redux
 import { useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -44,9 +45,11 @@ const CheckOutPage = () => {
       <S.Warning>
         *Please use the following test credit card for payments*
         <br />
-        4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+        4242 4242 4242 4242 - Exp: 01/24 - CVV: 123
       </S.Warning>
-      <S.PayButton>Pay Now</S.PayButton>
+      <S.PayButton>
+        <StripeCheckoutButton />
+      </S.PayButton>
     </S.CheckoutPage>
   );
 };

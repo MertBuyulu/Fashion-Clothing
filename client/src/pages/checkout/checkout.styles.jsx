@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import CustomButton from "../../components/custom-button/custom-button.component";
 
 export const CheckoutPage = styled.div`
   width: 55%;
@@ -42,7 +41,7 @@ export const Warning = styled.div`
   color: red;
 `;
 
-export const PayButton = styled(CustomButton)`
+export const PayButton = styled.div`
   margin-left: auto;
   margin-top: 50px;
   font-size: 16px;
