@@ -21,9 +21,6 @@ const config = {
 
 initializeApp(config);
 
-export const firestore = getFirestore();
-export const auth = getAuth();
-
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   // if the user is not signed in run the code below.
   if (!userAuth) return;
@@ -88,16 +85,21 @@ export const convertCollectionToMap = (collections) => {
 
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
-    const unSubscribe = onAuthStateChanged(
+    const unsubscribe = onAuthStateChanged(
       auth,
       (userAuth) => {
-        unSubscribe();
+        unsubscribe();
         resolve(userAuth);
       },
       reject
     );
   });
 };
+
+export const firestore = getFirestore();
+export const auth = getAuth();
+
+console.log(auth);
 
 export const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompts: "select_account" });

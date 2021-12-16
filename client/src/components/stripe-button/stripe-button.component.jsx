@@ -7,6 +7,7 @@ const StripeCheckoutButton = ({ price }) => {
   const publishableKey =
     "pk_test_51K4TRCC76KeAEfHP08WArE2N6dFKNqBnXo4LowcnVKi9Q8qAUbxmHdqCScmEtNoupVUEFWwLz3Ii5bt8um2OI0t700k5gnrRL7";
 
+  // old way to request something from the api/proxy
   const onToken = (token) => {
     axios({
       url: "payment",
@@ -33,6 +34,7 @@ const StripeCheckoutButton = ({ price }) => {
       name="CRWN Clothing Ltd."
       billingAddress
       shippingAddress
+      image="https://svgshare.com/i/CUz.svg"
       description={`Your total is $${price}`}
       amount={priceForStripe}
       panelLabel="Pay Now"
