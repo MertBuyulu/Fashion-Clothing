@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const CollectionPage = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const Title = styled.h2`
@@ -18,4 +19,8 @@ export const Items = styled.div`
   & > div {
     margin-bottom: 30px;
   }
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 `;

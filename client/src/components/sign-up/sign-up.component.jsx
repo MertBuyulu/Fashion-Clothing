@@ -86,6 +86,10 @@ const SignUpForm = styled.div`
   display: flex;
   flex-direction: column;
   width: 380px;
+
+  @media screen and (max-width: 400px) {
+    width: 360px;
+  }
 `;
 
 export default SignUp;

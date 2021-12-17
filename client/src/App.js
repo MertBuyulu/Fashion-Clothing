@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 // styles
-import "./App.css";
+import { GlobalStyle } from "./global.styles";
 // userReducer action function
 import { selectCurrentUser } from "./redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
@@ -30,18 +30,23 @@ function App() {
 
   return (
     // <Route> paths match exactly by default.\
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="shop/*" element={<ShopPage />} />
-        <Route path="checkout" element={<CheckOutPage />} />
-        <Route
-          path="signin"
-          element={currentUser ? <Navigate to="/" /> : <SingInAndSignUpPage />}
-        />
-      </Routes>
-    </Router>
+    <>
+      <GlobalStyle />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="shop/*" element={<ShopPage />} />
+          <Route path="checkout" element={<CheckOutPage />} />
+          <Route
+            path="signin"
+            element={
+              currentUser ? <Navigate to="/" /> : <SingInAndSignUpPage />
+            }
+          />
+        </Routes>
+      </Router>
+    </>
   );
 }
 

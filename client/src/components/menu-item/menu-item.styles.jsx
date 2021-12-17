@@ -23,6 +23,16 @@ export const MenuItem = styled.div`
       opacity: 0.9;
     }
   }
+
+  @media screen and (max-width: 470px) {
+    height: 220px;
+    min-width: 90%;
+  }
+
+  @media screen and (min-width: 470px) and (max-width: 800px) {
+    height: 220px;
+    min-width: 40%;
+  }
 `;
 
 export const BackGroundImage = styled.div`
@@ -52,6 +62,7 @@ export const Title = styled.h1`
   font-size: 22px;
   color: #4a4a4a;
 `;
+
 export const SubTitle = styled.span`
   font-weight: lighter;
   font-size: 16px;

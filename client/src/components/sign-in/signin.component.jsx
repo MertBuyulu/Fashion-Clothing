@@ -71,6 +71,10 @@ const SignInForm = styled.div`
   width: 380px;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 400px) {
+    width: 360px;
+  }
 `;
 
 const SignInButtons = styled.div`

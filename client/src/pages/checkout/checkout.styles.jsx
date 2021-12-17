@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
 export const CheckoutPage = styled.div`
-  width: 55%;
+  width: 60%;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   // top | horizontal | bottom
   margin: 50px auto 0;
+
+  @media screen and (max-width: 800px) {
+    width: 90%;
+  }
 `;
 
 export const CheckoutHeader = styled.div`
@@ -39,6 +43,10 @@ export const Warning = styled.div`
   margin-top: 40px;
   font-size: 24px;
   color: red;
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+  }
 `;
 
 export const PayButton = styled.div`
