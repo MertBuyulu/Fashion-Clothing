@@ -35,18 +35,30 @@ const CheckOutPage = () => {
           <span>Remove</span>
         </S.HeaderBlock>
       </S.CheckoutHeader>
-      {cartItems.map((cartItem) => (
-        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
-      ))}
+      {cartItems.length ? (
+        cartItems.map((cartItem) => (
+          <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+        ))
+      ) : (
+        <S.Message>
+          Your cart is empty...
+          <br />
+          Please add items to enable pay option.
+        </S.Message>
+      )}
 
       <S.TotalCost>
-        <span>TOTAL: ${total}</span>
+        {cartItems.length ? <span>TOTAL: ${total}</span> : ""}
       </S.TotalCost>
-      <S.Warning>
-        *Please use the following test credit card for payments*
-        <br />
-        4242 4242 4242 4242 - Exp: 01/24 - CVV: 123
-      </S.Warning>
+      {cartItems.length ? (
+        <S.Warning>
+          *Please use the following test credit card for payments*
+          <br />
+          4242 4242 4242 4242 - Exp: 01/24 - CVV: 123
+        </S.Warning>
+      ) : (
+        ""
+      )}
       <S.PayButton>
         <StripeCheckoutButton price={total} />
       </S.PayButton>

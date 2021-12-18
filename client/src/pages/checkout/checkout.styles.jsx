@@ -54,3 +54,10 @@ export const PayButton = styled.div`
   margin-top: 50px;
   font-size: 16px;
 `;
+
+export const Message = styled.span`
+  font-size: 25px;
+  margin: 100px auto;
+  display: flex;
+  text-align: center;
+`;

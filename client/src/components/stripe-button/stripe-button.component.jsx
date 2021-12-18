@@ -28,7 +28,8 @@ const StripeCheckoutButton = ({ price }) => {
       });
   };
 
-  return (
+  // do not show the stripe pay button if a user has no items in their shopping cart
+  return price ? (
     <StripeCheckout
       label="Pay Now"
       name="CRWN Clothing Ltd."
@@ -41,6 +42,8 @@ const StripeCheckoutButton = ({ price }) => {
       token={onToken}
       stripeKey={publishableKey}
     />
+  ) : (
+    ""
   );
 };
 

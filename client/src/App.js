@@ -20,6 +20,7 @@ import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SingInAndSignUpPage from "./pages/sing-in and sign-up page/sign-in-and-sign-up.component";
 import ErrorPage from "./pages/error-page/error-page.component";
+import ContactPage from "./pages/contactpage/contact-page.components";
 
 function App() {
   const { currentUser } = useSelector(structuredSelector);
@@ -45,6 +46,7 @@ function App() {
               currentUser ? <Navigate to="/" /> : <SingInAndSignUpPage />
             }
           />
+          <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>

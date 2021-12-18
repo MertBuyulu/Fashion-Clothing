@@ -43,6 +43,25 @@ export const FormInput = styled.input`
   }
 `;
 
+export const TextArea = styled.textarea`
+  width: 380px;
+  height: 100px;
+  font-size: 16px;
+  color: ${subColor};
+
+  &:focus {
+    // An outline is a line drawn outside the element's border
+    outline: none;
+  }
+
+  // learn what this css selector does: ~
+  &:focus ~ label {
+    top: -18px;
+    font-size: 12px;
+    color: ${mainColor};
+  }
+`;
+
 export const FormInputLabel = styled.label`
   color: ${subColor};
   font-size: 16px;
