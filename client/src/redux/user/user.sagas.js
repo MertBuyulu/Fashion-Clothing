@@ -27,6 +27,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+
 import { getDoc } from "firebase/firestore";
 
 export function* getSnapShotFromUserAuth(userAuth, additionalData) {
@@ -37,7 +38,6 @@ export function* getSnapShotFromUserAuth(userAuth, additionalData) {
       additionalData
     );
     const userSnapShot = yield getDoc(userRef);
-
     yield put(signInSuccess({ id: userSnapShot.id, ...userSnapShot.data() }));
   } catch (error) {
     yield put(signInFailure(error));
